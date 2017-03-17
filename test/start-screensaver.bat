@@ -1,0 +1,1 @@
+@start /wait %windir%\System32\Mystify.scr /s
