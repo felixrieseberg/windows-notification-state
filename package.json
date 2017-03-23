@@ -1,6 +1,6 @@
 {
   "name": "windows-notification-state",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "SHQueryUserNotificationState as a native Node addon",
   "main": "lib/index.js",
   "scripts": {
