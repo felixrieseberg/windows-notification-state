@@ -21,8 +21,10 @@ void Method(const v8::FunctionCallbackInfo<Value>& args) {
 
 void Init(Local<Object> exports) {
   Isolate* isolate = Isolate::GetCurrent();
-  exports->Set(String::NewFromUtf8(isolate, "getNotificationState"),
-      FunctionTemplate::New(isolate, Method)->GetFunction());
+
+  Nan::Set(exports, String::NewFromUtf8(isolate, "getNotificationState"),
+     Nan::GetFunction(FunctionTemplate::New(isolate, Method)).ToLocalChecked()
+  );
 }
 
 NODE_MODULE(quiethours, Init)
