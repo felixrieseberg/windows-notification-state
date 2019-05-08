@@ -6,7 +6,7 @@ npm install windows-notification-state
 ```
 
 ```
-const { shQueryUserNotificationState, getNotificationState } = require('windows-quiet-hours`)
+const { shQueryUserNotificationState, getNotificationState } = require('windows-notification-state`)
 
 // This will print a number (corresponding with QUERY_USER_NOTIFICATION_STATE)
 console.log(shQueryUserNotificationState())
