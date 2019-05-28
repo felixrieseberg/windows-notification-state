@@ -1,5 +1,6 @@
 #include <node.h>
 #include <v8.h>
+#include <nan.h>
 
 #ifdef _WIN32
 #include "notificationstate-query.h"

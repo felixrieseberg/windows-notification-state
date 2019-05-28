@@ -1,3 +1,5 @@
+#define _WINSOCKAPI_
+
 #include <windows.h>
 #include <shlobj.h>
 #pragma comment(lib, "shell32.lib")
