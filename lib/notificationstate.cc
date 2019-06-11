@@ -8,21 +8,20 @@
 
 using namespace v8;
 
-void GetNotificationState(const v8::FunctionCallbackInfo<Value>& args) {
+NAN_METHOD(GetNotificationState) {
   Isolate* isolate = Isolate::GetCurrent();
   HandleScope scope(isolate);
   int returnValue = -1;
 
-  #ifdef _WIN32
+  #ifdef TARGET_OS_MAC
     returnValue = queryUserNotificationState();
   #endif
 
-  args.GetReturnValue().Set(Int32::New(isolate, returnValue));
+  info.GetReturnValue().Set(Int32::New(isolate, returnValue));
 }
 
 NAN_MODULE_INIT(Init) {
-  Nan::Set(target, Nan::New<String>("getNotificationState").ToLocalChecked(),
-    Nan::GetFunction(Nan::New<FunctionTemplate>(GetNotificationState)).ToLocalChecked());
+  Nan::SetMethod(target, "getNotificationState", GetNotificationState);
 }
 
 NODE_MODULE(quiethours, Init)
