@@ -1,6 +1,5 @@
 # http://www.appveyor.com/docs/appveyor-yml
 
-# Test against these versions of Io.js and Node.js.
 environment:
   matrix:
   # node.js
@@ -10,7 +9,7 @@ environment:
 # Install scripts. (runs after repo cloning)
 install:
   # Get the latest stable version of Node 0.STABLE.latest
-  - ps: Install-Product node $env:nodejs_version
+  - ps: Update-NodeJsInstallation (Get-NodeJsLatestBuild $env:nodejs_version) $env:PLATFORM
   - set PATH=%APPDATA%\npm;%PATH%
 
 # Post-install test scripts.
