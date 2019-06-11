@@ -8,7 +8,7 @@
 
 using namespace v8;
 
-void Method(const v8::FunctionCallbackInfo<Value>& args) {
+void GetNotificationState(const v8::FunctionCallbackInfo<Value>& args) {
   Isolate* isolate = Isolate::GetCurrent();
   HandleScope scope(isolate);
   int returnValue = -1;
@@ -20,12 +20,9 @@ void Method(const v8::FunctionCallbackInfo<Value>& args) {
   args.GetReturnValue().Set(Int32::New(isolate, returnValue));
 }
 
-void Init(Local<Object> exports) {
-  Isolate* isolate = Isolate::GetCurrent();
-
-  Nan::Set(exports, String::NewFromUtf8(isolate, "getNotificationState"),
-     Nan::GetFunction(FunctionTemplate::New(isolate, Method)).ToLocalChecked()
-  );
+NAN_MODULE_INIT(Init) {
+  Nan::Set(target, New<String>("getNotificationState").ToLocalChecked(),
+    Nan::GetFunction(New<FunctionTemplate>(GetNotificationState)).ToLocalChecked());
 }
 
 NODE_MODULE(quiethours, Init)
