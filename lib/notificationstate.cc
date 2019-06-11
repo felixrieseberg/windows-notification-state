@@ -21,8 +21,8 @@ void GetNotificationState(const v8::FunctionCallbackInfo<Value>& args) {
 }
 
 NAN_MODULE_INIT(Init) {
-  Nan::Set(target, New<String>("getNotificationState").ToLocalChecked(),
-    Nan::GetFunction(New<FunctionTemplate>(GetNotificationState)).ToLocalChecked());
+  Nan::Set(target, Nan::New<String>("getNotificationState").ToLocalChecked(),
+    Nan::GetFunction(Nan::New<FunctionTemplate>(GetNotificationState)).ToLocalChecked());
 }
 
 NODE_MODULE(quiethours, Init)
