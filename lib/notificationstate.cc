@@ -8,20 +8,29 @@
 
 using namespace v8;
 
-NAN_METHOD(GetNotificationState) {
-  Isolate* isolate = Isolate::GetCurrent();
+NAN_METHOD(GetNotificationState)
+{
+  Isolate *isolate = Isolate::GetCurrent();
   HandleScope scope(isolate);
   int returnValue = -1;
 
-  #ifdef TARGET_OS_MAC
-    returnValue = queryUserNotificationState();
-  #endif
+  returnValue = queryUserNotificationState();
+  info.GetReturnValue().Set(Int32::New(isolate, returnValue));
+}
+NAN_METHOD(GetQuietHoursState)
+{
+  Isolate *isolate = Isolate::GetCurrent();
+  HandleScope scope(isolate);
+  int returnValue = -1;
 
+  returnValue = queryQuietHoursState();
   info.GetReturnValue().Set(Int32::New(isolate, returnValue));
 }
 
-NAN_MODULE_INIT(Init) {
+NAN_MODULE_INIT(Init)
+{
   Nan::SetMethod(target, "getNotificationState", GetNotificationState);
+  Nan::SetMethod(target, "getQuietHours", GetQuietHoursState);
 }
 
 NODE_MODULE(quiethours, Init)
