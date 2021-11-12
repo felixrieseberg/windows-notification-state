@@ -12,7 +12,7 @@ NAN_METHOD(GetNotificationState)
 {
   Isolate *isolate = Isolate::GetCurrent();
   HandleScope scope(isolate);
-  int returnValue = -2;
+  int returnValue = -1;
 
   returnValue = queryUserNotificationState();
   info.GetReturnValue().Set(Int32::New(isolate, returnValue));
@@ -21,7 +21,7 @@ NAN_METHOD(GetQuietHoursState)
 {
   Isolate *isolate = Isolate::GetCurrent();
   HandleScope scope(isolate);
-  int returnValue = -2;
+  int returnValue = -1;
 
   returnValue = queryQuietHoursState();
   info.GetReturnValue().Set(Int32::New(isolate, returnValue));
