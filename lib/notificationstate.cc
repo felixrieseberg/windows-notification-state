@@ -10,7 +10,7 @@ using namespace Napi;
 Napi::Value GetNotificationState(const Napi::CallbackInfo& info) {
   int returnValue = -1;
 
-  #ifdef TARGET_OS_MAC
+  #ifdef _WIN32
     returnValue = queryUserNotificationState();
   #endif
 
