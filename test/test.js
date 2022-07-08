@@ -38,8 +38,10 @@ describe('Screensaver (QUNS_BUSY) test', () => {
 
     let secondsLeft = 3
     const interval = setInterval(() => {
-      process.stdout.clearLine()
-      process.stdout.cursorTo(5)
+      if (process.stdout.clearLine) {
+        process.stdout.clearLine()
+        process.stdout.cursorTo(5)
+      }
       process.stdout.write(`Starting screensaver in ${secondsLeft}s...`)
       secondsLeft = secondsLeft - 1
 

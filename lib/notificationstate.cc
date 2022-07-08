@@ -1,27 +1,27 @@
-#include <node.h>
-#include <v8.h>
-#include <nan.h>
+#include <napi.h>
+#include <uv.h>
 
 #ifdef _WIN32
 #include "notificationstate-query.h"
 #endif
 
-using namespace v8;
+using namespace Napi;
 
-NAN_METHOD(GetNotificationState) {
-  Isolate* isolate = Isolate::GetCurrent();
-  HandleScope scope(isolate);
+Napi::Value GetNotificationState(const Napi::CallbackInfo& info) {
   int returnValue = -1;
 
-  #ifdef TARGET_OS_MAC
+  #ifdef _WIN32
     returnValue = queryUserNotificationState();
   #endif
 
-  info.GetReturnValue().Set(Int32::New(isolate, returnValue));
+  return Napi::Number::New(info.Env(), returnValue);
 }
 
-NAN_MODULE_INIT(Init) {
-  Nan::SetMethod(target, "getNotificationState", GetNotificationState);
+Napi::Object Init(Napi::Env env, Napi::Object exports) {
+  exports.Set(Napi::String::New(env, "getNotificationState"),
+              Napi::Function::New(env, GetNotificationState));
+
+  return exports;
 }
 
-NODE_MODULE(quiethours, Init)
+NODE_API_MODULE(quiethours, Init)
